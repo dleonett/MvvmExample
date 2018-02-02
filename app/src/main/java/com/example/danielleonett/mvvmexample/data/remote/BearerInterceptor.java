@@ -1,5 +1,7 @@
 package com.example.danielleonett.mvvmexample.data.remote;
 
+import android.support.annotation.NonNull;
+
 import com.example.danielleonett.mvvmexample.data.local.PreferencesManager;
 import com.example.danielleonett.mvvmexample.util.Constants;
 
@@ -14,12 +16,8 @@ public class BearerInterceptor implements Interceptor {
     // Constants
     private static final String TAG = BearerInterceptor.class.getSimpleName();
 
-    public BearerInterceptor() {
-        super();
-    }
-
     @Override
-    public Response intercept(Chain chain) throws IOException {
+    public Response intercept(@NonNull Chain chain) throws IOException {
         Request.Builder requestBuilder;
 
         requestBuilder = chain.request().newBuilder().addHeader(

@@ -42,45 +42,16 @@ public class SpotifyRemote {
     }
 
     private void initApiServiceAuth() {
-        // Logging interceptor
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-        // Bearer interceptor
         BearerInterceptor bearerInterceptor = new BearerInterceptor();
 
-        OkHttpClient client = new OkHttpClient.Builder()
-                .addInterceptor(loggingInterceptor)
-                .addInterceptor(bearerInterceptor)
-                .build();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.Url.BASE_URL)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build();
-
-        apiServiceAuth = retrofit.create(SpotifyApiService.class);
+        apiServiceAuth = HttpClientGenerator.createClient(SpotifyApiService.class,
+                Constants.Url.BASE_URL,
+                bearerInterceptor);
     }
 
     private void initApiService() {
-        // Logging interceptor
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-        OkHttpClient client = new OkHttpClient.Builder()
-                .addInterceptor(loggingInterceptor)
-                .build();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.Url.BASE_URL)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build();
-
-        apiService = retrofit.create(SpotifyApiService.class);
+        apiService = HttpClientGenerator.createClient(SpotifyApiService.class,
+                Constants.Url.BASE_URL);
     }
 
     public Single<AuthResponse> auth() {
