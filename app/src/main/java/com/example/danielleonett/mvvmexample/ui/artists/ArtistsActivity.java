@@ -19,6 +19,7 @@ import com.example.danielleonett.mvvmexample.ui.base.BaseActivity;
 import com.example.danielleonett.mvvmexample.ui.base.BaseRecyclerAdapter;
 import com.example.danielleonett.mvvmexample.ui.common.GridSpacingItemDecoration;
 import com.example.danielleonett.mvvmexample.util.KeyboardUtils;
+import com.example.danielleonett.mvvmexample.util.ViewUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -154,6 +155,7 @@ public class ArtistsActivity extends BaseActivity implements
     @OnClick(R.id.btnClearSearch)
     public void onClearSearchClick() {
         inputSearch.setText("");
+        ViewUtils.requestFocus(this, inputSearch);
     }
 
     private void showLoading() {
