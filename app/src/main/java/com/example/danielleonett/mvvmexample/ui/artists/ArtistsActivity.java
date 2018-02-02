@@ -128,7 +128,6 @@ public class ArtistsActivity extends BaseActivity implements
     }
 
     private void onArtistsViewModelChanged(UiStateModel<List<Artist>> artistsUiStateModel) {
-        Log.d(TAG, "onArtistsViewModelChanged() - NULL: " + (artistsUiStateModel == null));
         if (artistsUiStateModel == null) return;
 
         if (artistsUiStateModel.isInProgress()) {
