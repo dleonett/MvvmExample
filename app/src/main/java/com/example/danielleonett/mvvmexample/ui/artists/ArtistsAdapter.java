@@ -56,10 +56,6 @@ public class ArtistsAdapter extends BaseRecyclerAdapter<Artist, BaseRecyclerAdap
         public void bindViews(final Artist artist) {
             labelName.setText(artist.getName());
 
-            final String imageUrl = (artist.getImages().size() > 0)
-                    ? artist.getImages().get(0).getUrl()
-                    : "qwerty";
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -75,7 +71,7 @@ public class ArtistsAdapter extends BaseRecyclerAdapter<Artist, BaseRecyclerAdap
                     itemView.getLayoutParams().height = itemView.getWidth();
 
                     Picasso.with(itemView.getContext())
-                            .load(imageUrl)
+                            .load(artist.getCoverImage())
                             .placeholder(R.color.grey_700)
                             .into(imageCover);
                 }

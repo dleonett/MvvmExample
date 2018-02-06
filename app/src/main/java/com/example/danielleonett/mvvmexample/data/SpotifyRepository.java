@@ -31,7 +31,7 @@ public class SpotifyRepository {
         spotifyRemote = SpotifyRemote.getInstance();
     }
 
-    public Single<ArtistsResponse> authAndsearchArtists(final String query) {
+    private Single<ArtistsResponse> authAndsearchArtists(final String query) {
         return spotifyRemote.auth()
                 .flatMap(new Function<AuthResponse, SingleSource<? extends ArtistsResponse>>() {
                     @Override

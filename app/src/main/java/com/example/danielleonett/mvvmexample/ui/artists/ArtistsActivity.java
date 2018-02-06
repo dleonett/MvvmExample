@@ -15,6 +15,7 @@ import android.view.View;
 import com.example.danielleonett.mvvmexample.R;
 import com.example.danielleonett.mvvmexample.data.model.Artist;
 import com.example.danielleonett.mvvmexample.data.model.UiStateModel;
+import com.example.danielleonett.mvvmexample.ui.artists.detail.ArtistDetailActivity;
 import com.example.danielleonett.mvvmexample.ui.base.BaseActivity;
 import com.example.danielleonett.mvvmexample.ui.base.BaseRecyclerAdapter;
 import com.example.danielleonett.mvvmexample.ui.common.GridSpacingItemDecoration;
@@ -129,6 +130,8 @@ public class ArtistsActivity extends BaseActivity implements
     }
 
     private void onArtistsViewModelChanged(UiStateModel<List<Artist>> artistsUiStateModel) {
+        Log.d(TAG, "onArtistsViewModelChanged()");
+
         if (artistsUiStateModel == null) return;
 
         if (artistsUiStateModel.isInProgress()) {
@@ -178,6 +181,13 @@ public class ArtistsActivity extends BaseActivity implements
 
     @Override
     public void onArtistClick(Artist artist) {
+        navigateToArtistDetail(artist);
+    }
 
+    private void navigateToArtistDetail(Artist artist) {
+        Bundle args = new Bundle();
+        args.putParcelable(ArtistDetailActivity.ARG_ARTIST, artist);
+
+        startActivity(ArtistDetailActivity.newIntent(this, args));
     }
 }

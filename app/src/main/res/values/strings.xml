@@ -4,4 +4,6 @@
     <string name="artists_search">Search</string>
     <string name="artists_search_artist_hint">Search artist…</string>
     <string name="artists_artists_empty_view_title">No artists found :(</string>
+    <string name="artist_detail_popularity">Popularity</string>
+    <string name="artist_detail_genres">Genres</string>
 </resources>

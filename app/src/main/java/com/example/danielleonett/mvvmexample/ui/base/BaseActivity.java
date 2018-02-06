@@ -3,7 +3,10 @@ package com.example.danielleonett.mvvmexample.ui.base;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
@@ -91,5 +94,18 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
 
         return null;
+    }
+
+    public void addFragment(@IdRes int containerViewId, Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(containerViewId, fragment);
+        transaction.commit();
+    }
+
+    public void replaceFragment(@IdRes int containerViewId, Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(containerViewId, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }

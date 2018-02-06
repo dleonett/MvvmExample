@@ -6,6 +6,7 @@
     <dimen name="spacing16">16dp</dimen>
     <dimen name="spacing20">20dp</dimen>
     <dimen name="spacing24">24dp</dimen>
+    <dimen name="spacing32">32dp</dimen>
 
     <dimen name="grid_layout_items_spacing">16dp</dimen>
 </resources>
