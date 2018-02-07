@@ -16,8 +16,6 @@ public class ArtistDetailViewModel extends BaseViewModel {
 
     private MutableLiveData<Artist> artistLiveData;
 
-    private Artist artist;
-
     public ArtistDetailViewModel() {
         artistLiveData = new MutableLiveData<>();
     }
@@ -27,7 +25,6 @@ public class ArtistDetailViewModel extends BaseViewModel {
     }
 
     public void setArtist(Artist artist) {
-        this.artist = artist;
         artistLiveData.setValue(artist);
     }
 

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
@@ -96,15 +97,20 @@ public abstract class BaseActivity extends AppCompatActivity {
         return null;
     }
 
-    public void addFragment(@IdRes int containerViewId, Fragment fragment) {
+    public boolean isFragmentAdded(String fragmentTag) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        return fragmentManager.findFragmentByTag(fragmentTag) != null;
+    }
+
+    public void addFragment(@IdRes int containerViewId, Fragment fragment, String tag) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(containerViewId, fragment);
+        transaction.add(containerViewId, fragment, tag);
         transaction.commit();
     }
 
-    public void replaceFragment(@IdRes int containerViewId, Fragment fragment) {
+    public void replaceFragment(@IdRes int containerViewId, Fragment fragment, String tag) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(containerViewId, fragment);
+        transaction.replace(containerViewId, fragment, tag);
         transaction.addToBackStack(null);
         transaction.commit();
     }

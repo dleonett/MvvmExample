@@ -53,7 +53,9 @@ public class ArtistDetailActivity extends BaseActivity implements
     }
 
     private void addArtistDetailFragment() {
-        addFragment(R.id.container, artistDetailFragment);
+        if (isFragmentAdded(ArtistDetailFragment.TAG)) return;
+
+        addFragment(R.id.container, artistDetailFragment, ArtistDetailFragment.TAG);
     }
 
     @Override
