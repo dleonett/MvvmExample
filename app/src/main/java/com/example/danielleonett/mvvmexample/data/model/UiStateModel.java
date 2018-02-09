@@ -59,4 +59,22 @@ public class UiStateModel<T> {
     public static <T> UiStateModel<T> failure(String errorMessage) {
         return new UiStateModel<>(false, true, false, errorMessage, null);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        if (((UiStateModel) obj).isInProgress() == this.inProgress)
+            return true;
+        if (((UiStateModel) obj).isError() == this.isError)
+            return true;
+        return (((UiStateModel) obj).isSuccess() == this.isSuccess
+                && (this.data != null
+                && ((UiStateModel) obj).getData() != null
+                && ((UiStateModel) obj).getData().equals(this.data)));
+    }
 }

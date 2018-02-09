@@ -20,6 +20,11 @@ public class Artist implements Parcelable {
     public Artist() {
     }
 
+    public Artist(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     protected Artist(Parcel in) {
         id = in.readString();
         name = in.readString();

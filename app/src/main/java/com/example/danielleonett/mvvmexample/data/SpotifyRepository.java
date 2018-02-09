@@ -16,8 +16,11 @@ import io.reactivex.functions.Predicate;
 
 public class SpotifyRepository {
 
-    private static SpotifyRepository instance;
+    // Constants
+    public static final String TAG = SpotifyRepository.class.getSimpleName();
 
+    // Fields
+    private static SpotifyRepository instance;
     private SpotifyRemote spotifyRemote;
 
     public static SpotifyRepository getInstance() {
@@ -31,7 +34,7 @@ public class SpotifyRepository {
         spotifyRemote = SpotifyRemote.getInstance();
     }
 
-    private Single<ArtistsResponse> authAndsearchArtists(final String query) {
+    private Single<ArtistsResponse> authAndSearchArtists(final String query) {
         return spotifyRemote.auth()
                 .flatMap(new Function<AuthResponse, SingleSource<? extends ArtistsResponse>>() {
                     @Override
@@ -48,22 +51,14 @@ public class SpotifyRepository {
         return Single.concat(
                 spotifyRemote.searchArtists(query)
                         .onErrorReturnItem(new ArtistsResponse()),
-                authAndsearchArtists(query))
+                authAndSearchArtists(query))
                 .filter(new Predicate<ArtistsResponse>() {
                     @Override
                     public boolean test(ArtistsResponse artistsResponse) throws Exception {
                         return artistsResponse.getArtists() != null;
                     }
                 })
-                .first(new ArtistsResponse());
-    }
-
-    public Single<ArtistsResponse> searchAlbums(String query) {
-        return spotifyRemote.searchArtists(query);
-    }
-
-    public Single<ArtistsResponse> searchTracks(String query) {
-        return spotifyRemote.searchArtists(query);
+                .firstOrError();
     }
 
 }

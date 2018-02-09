@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.danielleonett.mvvmexample.R;
+import com.example.danielleonett.mvvmexample.data.SpotifyRepository;
 import com.example.danielleonett.mvvmexample.data.model.Artist;
 import com.example.danielleonett.mvvmexample.data.model.UiStateModel;
 import com.example.danielleonett.mvvmexample.ui.artists.detail.ArtistDetailActivity;
@@ -28,6 +29,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class ArtistsActivity extends BaseActivity implements
         BaseRecyclerAdapter.OnEmptyStateListener,
@@ -113,8 +116,15 @@ public class ArtistsActivity extends BaseActivity implements
     }
 
     private void initViewModels() {
-        artistsViewModel =
-                ViewModelProviders.of(this).get(ArtistsViewModel.class);
+        ArtistsViewModelFactory modelFactory = new ArtistsViewModelFactory(
+                SpotifyRepository.getInstance(),
+                Schedulers.io(),
+                AndroidSchedulers.mainThread()
+        );
+
+        artistsViewModel = ViewModelProviders
+                .of(this, modelFactory)
+                .get(ArtistsViewModel.class);
 
         subscribeToArtistsViewModel();
     }
