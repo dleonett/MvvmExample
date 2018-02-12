@@ -1,6 +1,5 @@
 package com.example.danielleonett.mvvmexample;
 
-import android.app.Application;
 import android.arch.core.executor.testing.InstantTaskExecutorRule;
 import android.arch.lifecycle.Observer;
 
@@ -14,9 +13,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestRule;
-import org.mockito.ArgumentCaptor;
 import org.mockito.ArgumentMatcher;
-import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -26,7 +23,6 @@ import java.util.List;
 import io.reactivex.Single;
 import io.reactivex.schedulers.TestScheduler;
 
-import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
@@ -53,7 +49,7 @@ public class ArtistsViewModelTest {
     private TestScheduler testScheduler;
 
     @Before
-    public void setupArtistsViewModel() {
+    public void setup() {
         MockitoAnnotations.initMocks(this);
 
         testScheduler = new TestScheduler();

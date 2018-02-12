@@ -11,6 +11,13 @@ public class AuthResponse {
     @SerializedName("access_token")
     private String accessToken;
 
+    public AuthResponse() {
+    }
+
+    public AuthResponse(String accessToken) {
+        this.accessToken = accessToken;
+    }
+
     public String getAccessToken() {
         return accessToken;
     }
